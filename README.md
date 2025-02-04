@@ -1,17 +1,17 @@
 - [x] setup server + database
-- [ ] setup graphql
-- [ ] add queries
+- [x] setup graphql
+- [x] add queries
 
-  - [ ] `courses(limit, sortOrder)`: Returns a list of courses in the database. Accepts optional parameters `limit` (integer) and `sortOrder` (enum: `ASC` | `DESC`).
-  - [ ] `course(id)`: Returns the course with the specified `id`.
-  - [ ] `collections`: Returns a list of all course collections (categories).
-  - [ ] `collection(id)`: Returns a specific collection along with all contained courses.
+  - [x] `courses(limit, sortOrder)`: Returns a list of courses in the database. Accepts optional parameters `limit` (integer) and `sortOrder` (enum: `ASC` | `DESC`).
+  - [x] `course(id)`: Returns the course with the specified `id`.
+  - [x] `collections`: Returns a list of all course collections (categories).
+  - [x] `collection(id)`: Returns a specific collection along with all contained courses.
 
-- [ ] add mutations
+- [x] add mutations
 
-  - [ ] `addCourse(input)`: Adds a new course to the database.
-  - [ ] `updateCourse(id, input)`: Updates a course's details based on its ID.
-  - [ ] `deleteCourse(id)`: Deletes a course from the database by its ID.
+  - [x] `addCourse(input)`: Adds a new course to the database.
+  - [x] `updateCourse(id, input)`: Updates a course's details based on its ID.
+  - [x] `deleteCourse(id)`: Deletes a course from the database by its ID.
 
 - [ ] add authentication + authorization
   - [ ] `register(username, password)`: Allows users to create a new account.

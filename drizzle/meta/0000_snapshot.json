@@ -1,9 +1,40 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "7acdc6f8-8620-4404-850f-7d45bd7949c4",
+  "id": "960b8098-2922-40cb-8b88-0b862d10a1c3",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "collections": {
+      "name": "collections",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "collections_id": {
+          "name": "collections_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
     "courses": {
       "name": "courses",
       "columns": {
@@ -18,28 +49,35 @@
           "name": "title",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "description": {
           "name": "description",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "duration": {
           "name": "duration",
           "type": "int",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "outcome": {
           "name": "outcome",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "collection_id": {
+          "name": "collection_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
           "autoincrement": false
         }
       },

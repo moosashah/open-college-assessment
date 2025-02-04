@@ -1,0 +1,10 @@
+type Collection {
+  id: ID!
+  name: String!
+  courses: [Course!]
+}
+
+type Query {
+  collections: [Collection!]!
+  collection(id: ID!): Collection
+}

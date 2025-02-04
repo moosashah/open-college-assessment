@@ -27,6 +27,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 600,
       outcome: "Outcome 1",
       collectionId: collectionIds[0].id,
+      ownerId: 2,
     },
     {
       title: "Chemistry",
@@ -35,6 +36,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 120,
       outcome: "Outcome 2",
       collectionId: collectionIds[0].id,
+      ownerId: 2,
     },
     {
       title: "Physics",
@@ -43,6 +45,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 60,
       outcome: "Outcome 3",
       collectionId: collectionIds[0].id,
+      ownerId: 2,
     },
     {
       title: "Mathematics",
@@ -51,6 +54,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 120,
       outcome: "Outcome 4",
       collectionId: collectionIds[1].id,
+      ownerId: 2,
     },
     {
       title: "History",
@@ -59,6 +63,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 60,
       outcome: "Outcome 5",
       collectionId: collectionIds[2].id,
+      ownerId: 2,
     },
     {
       title: "Geography",
@@ -67,6 +72,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 60,
       outcome: "Outcome 6",
       collectionId: collectionIds[2].id,
+      ownerId: 2,
     },
   ]);
   console.log("Courses seeded successfully");

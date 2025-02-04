@@ -1,8 +1,8 @@
 import {
   getCollection,
   listCollections,
-} from "../services/collection.services";
-import { getCourseByCollectionId } from "../services/courses.services";
+} from "../services/collection.service";
+import { getCourseByCollectionId } from "../services/course.service";
 
 export const collectionResolver = {
   Query: {

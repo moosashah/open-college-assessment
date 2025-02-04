@@ -5,6 +5,7 @@ type Course {
   duration: Int!
   outcome: String!
   collection: Collection!
+  ownerId: ID!
 }
 
 type Query {
@@ -29,4 +30,5 @@ input CourseInput {
   duration: Int!
   outcome: String!
   collectionId: ID!
+  ownerId:ID!
 }

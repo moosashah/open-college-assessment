@@ -1,0 +1,1 @@
+ALTER TABLE `courses` ADD `owner_id` int DEFAULT 2 NOT NULL;

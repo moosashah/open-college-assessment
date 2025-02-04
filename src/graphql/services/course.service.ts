@@ -16,9 +16,9 @@ export const listCourses = async (
   return result;
 };
 
-export const getCourse = async (id: string) => {
+export const getCourse = async (id: number) => {
   const course = await db.query.courses.findFirst({
-    where: (courses, { eq }) => eq(courses.id, +id),
+    where: (courses, { eq }) => eq(courses.id, id),
   });
 
   return course;
@@ -45,7 +45,7 @@ export const updateCourse = async (id: number, input: CourseInput) => {
   });
 };
 
-export const deleteCourse = async (id: string) => {
-  const [course] = await db.delete(courses).where(eq(courses.id, +id));
+export const deleteCourse = async (id: number) => {
+  const [course] = await db.delete(courses).where(eq(courses.id, id));
   return course.affectedRows > 0 ? true : false;
 };

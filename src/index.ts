@@ -6,10 +6,13 @@ import { runMigrations } from "./db";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { resolvers, typeDefs } from "./graphql";
+import { createContext } from "./context";
 
 const init = async () => {
   await runMigrations();
 };
+
+export const SUPER_SECRET_KEY = "SUPER_SECRET_KEY";
 
 const bootstrapServer = async () => {
   await init();
@@ -31,10 +34,14 @@ const bootstrapServer = async () => {
     res.send("Hello World");
   });
 
-  app.use("/graphql", expressMiddleware(server));
+  app.use(
+    "/graphql",
+    expressMiddleware(server, {
+      context: createContext,
+    }),
+  );
 
   app.listen({ port }, () => {
-    console.log(`Server ready at http://localhost:${port}`);
     console.log(`Graphql ready at http://localhost:${port}/graphql`);
   });
 };

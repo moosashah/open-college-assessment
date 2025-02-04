@@ -25,11 +25,10 @@ export const courseResolver = {
       console.log("add course resolver", input);
       return await addCourse(input);
     },
-    async updateCourse(
-      _parent: any,
-      { id, input }: { id: number; input: CourseInput },
-    ) {
-      return await updateCourse(id.toString(), input);
+    async updateCourse(_parent: any, args: { id: number; input: CourseInput }) {
+      console.log("update course", args);
+      const { id, input } = args;
+      return await updateCourse(id, input);
     },
     async deleteCourse(_parent: any, { id }: { id: number }) {
       return await deleteCourse(id.toString());

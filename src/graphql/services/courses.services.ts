@@ -38,9 +38,11 @@ export const addCourse = async (input: CourseInput) => {
   });
 };
 
-export const updateCourse = async (id: string, input: CourseInput) => {
-  const course = await db.update(courses).set(input).where(eq(courses.id, +id));
-  return course;
+export const updateCourse = async (id: number, input: CourseInput) => {
+  await db.update(courses).set(input).where(eq(courses.id, +id));
+  return await db.query.courses.findFirst({
+    where: (courses, { eq }) => eq(courses.id, id),
+  });
 };
 
 export const deleteCourse = async (id: string) => {

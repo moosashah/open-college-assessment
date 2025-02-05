@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/mysql2";
-import { courses, collections } from "../src/db/schema";
+import { courses, collections } from "../db/schema";
+import { register } from "../graphql/services/user.service";
 
 const db = drizzle(process.env.DATABASE_URL!);
 
@@ -18,7 +19,16 @@ const insertCollections = async () => {
   return result;
 };
 
-const insertCourses = async (collectionIds: { id: number }[]) => {
+const insertUser = async () => {
+  const user = await register({ username: "moosashah", password: "pass" });
+  console.log("user created successfully");
+  return user.user?.id;
+};
+
+const insertCourses = async (
+  collectionIds: { id: number }[],
+  userId: number,
+) => {
   await db.insert(courses).values([
     {
       title: "Biology",
@@ -27,7 +37,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 600,
       outcome: "Outcome 1",
       collectionId: collectionIds[0].id,
-      ownerId: 2,
+      ownerId: userId,
     },
     {
       title: "Chemistry",
@@ -36,7 +46,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 120,
       outcome: "Outcome 2",
       collectionId: collectionIds[0].id,
-      ownerId: 2,
+      ownerId: userId,
     },
     {
       title: "Physics",
@@ -45,7 +55,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 60,
       outcome: "Outcome 3",
       collectionId: collectionIds[0].id,
-      ownerId: 2,
+      ownerId: userId,
     },
     {
       title: "Mathematics",
@@ -54,7 +64,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 120,
       outcome: "Outcome 4",
       collectionId: collectionIds[1].id,
-      ownerId: 2,
+      ownerId: userId,
     },
     {
       title: "History",
@@ -63,7 +73,7 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 60,
       outcome: "Outcome 5",
       collectionId: collectionIds[2].id,
-      ownerId: 2,
+      ownerId: userId,
     },
     {
       title: "Geography",
@@ -72,28 +82,21 @@ const insertCourses = async (collectionIds: { id: number }[]) => {
       duration: 60,
       outcome: "Outcome 6",
       collectionId: collectionIds[2].id,
-      ownerId: 2,
+      ownerId: userId,
     },
   ]);
   console.log("Courses seeded successfully");
 };
 
-const seed = async () => {
+export const seed = async () => {
+  console.log("running seed function");
   try {
     const collectionIds = await insertCollections();
-    await insertCourses(collectionIds);
+    const userId = (await insertUser()) || 1;
+    await insertCourses(collectionIds, userId);
+    return;
   } catch (error) {
     console.error("Error seeding data:", error);
-    process.exit(1);
+    return;
   }
 };
-
-seed()
-  .then(() => {
-    console.log("Data seeded successfully");
-    process.exit(0);
-  })
-  .catch((error) => {
-    console.error("Error seeding data:", error);
-    process.exit(1);
-  });

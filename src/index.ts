@@ -7,16 +7,9 @@ import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { resolvers, typeDefs } from "./graphql";
 import { createContext } from "./context";
-
-const init = async () => {
-  await runMigrations();
-};
-
-export const SUPER_SECRET_KEY = "SUPER_SECRET_KEY";
+import { seed } from "./scripts/seed";
 
 const bootstrapServer = async () => {
-  await init();
-
   const port = process.env.PORT || 4000;
   const app = express();
 
@@ -30,8 +23,20 @@ const bootstrapServer = async () => {
   app.use(cors());
   app.use(express.json());
 
-  app.get("/", (_req, res) => {
-    res.send("Hello World");
+  app.get("/ping", (_req, res) => {
+    res.send("pong");
+  });
+
+  app.post("/seed", async (_req, res) => {
+    console.log("running seed");
+    await runMigrations();
+    seed()
+      .then(() => {
+        return res.send("database seeded successfully");
+      })
+      .catch((error) => {
+        return res.send(`Error seeding data: ${error}`);
+      });
   });
 
   app.use(
